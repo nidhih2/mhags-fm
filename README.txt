@@ -1,11 +1,11 @@
-Folder: mhags-pipeline-fm (Female to Male Transplant Pipeline)  
+mhags-pipeline-fm (Female to Male Transplant Pipeline)  
 
-####### Content:
+# Contents
 1. 7 python scripts + 1 test.py 
 2. 1 DockerFile
 3. 1 req.txt 
 
-####### Description: 
+# Description: 
 The pipeline takes in Donor and Patient WES samples, Sex, Patient HLA typing (tested on HLA-Matched Donor and Patients) - performs Variant Calling using DeepVariant, Variant Annotation using Funcotator, Merges Donor and Patient annotated data simultaneous *construction of Donor and Patient Custom Proteome, Gene/Variant Filtration steps: 1) Retains Variants specific to Patients, 2) Looks for Non-Synonymous Variants (Protein AA seq altering variants - Missense, Non-stop, Nonsense, Frame Shifts), 3) Looks for Variants present in "Tissues of Interest" (Lung, Liver, Skin, Colon, Lacrimal and Oral Mucosa - **scRNA Seq exp) ***AND ADDS ALL THE PEPTIDES ARISING FROM 9 MALE Y-SEX CHROMOSOME (gcloud path: gs://mhags-data/ychrom_9genes_peptides_for_blast.fa) ****Peptides - checks if remnant peptides are present in Donor or Patient Custom Proteomes, if not present then predicts binding stability using HLAthena with the Patient HLAs (Peptide-HLA binding prediction), HLAthena post processing: picks out peptides that have a binding stability of <0.5
 
 #######
@@ -21,7 +21,7 @@ The pipeline takes in Donor and Patient WES samples, Sex, Patient HLA typing (te
 
 **** Peptides = Peptides are taken from Funcotator Transcript subfolder (after Variant annotation)
 
-####### Storage details and other info:
+# Other configs and info:
 1. Docker name: "nidhihookeri/minors_pipeline_fm" (docker.com)
 2. TERRA Workspace name: broad-fireclous-wuclonal/mHAgs_pipeline_nidhi_FM
 3. TERRA Workflow name/Firecloud: mhags_pipeline_fm
@@ -30,7 +30,7 @@ The pipeline takes in Donor and Patient WES samples, Sex, Patient HLA typing (te
 6. Final WDL: mhags-pipeline-work/WDL/mhags_pipeline_fm.11.wdl
 7. Associated inputs JSON:  mhags-pipeline-work/WDL/mhags_pipeline_fm.11.json
 
-####### ORDER OF RUN (IF LOCALLY): 
+# ORDER OF RUN (IF LOCALLY): 
 1. bmt-simulation.py (includes as child files: functions.py, helpers.py, translation_helpers.py)
 2. blast_preprocessing.py
 3. blast_postprocessing.py
